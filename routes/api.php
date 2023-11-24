@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ObjekWisataController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TransaksiController;
+use App\Http\Controllers\PembayaranController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,4 +21,6 @@ use App\Http\Controllers\TransaksiController;
 Route::apiResource('objekwisata', ObjekWisataController::class);
 Route::apiResource('user', UserController::class);
 Route::apiResource('transaksi', TransaksiController::class);
+Route::apiResource('pembayaran', PembayaranController::class);
 Route::put('updatePassword/{email}', [UserController::class, 'updatePassword']);
+Route::get('sumPembayaranDalamTransaksi/{idtransaksi}', [PembayaranController::class, 'sumPembayaranDalamTransaksi']);

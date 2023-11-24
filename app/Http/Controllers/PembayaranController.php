@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pembayaran;
 use App\Models\Transaksi;
 use Illuminate\Http\Request;
 
-class TransaksiController extends Controller
+class PembayaranController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,11 +14,11 @@ class TransaksiController extends Controller
     public function index()
     {
         try {
-            $transaksi = Transaksi::all();
+            $pembayaran = Pembayaran::all();
             return response()->json([
                 'status' => true,
                 'message' => 'Berhasil ambil data',
-                'data' => $transaksi
+                'data' => $pembayaran
             ], 200);
         } catch (\Exception $e) {
             return response()->json([
@@ -34,12 +35,12 @@ class TransaksiController extends Controller
     public function store(Request $request)
     {
         try {
-            $transaksi = Transaksi::create($request->all());
+            $pembayaran = Pembayaran::create($request->all());
 
             return response()->json([
                 'status' => true,
                 'message' => 'Berhasil insert data',
-                'data' => $transaksi
+                'data' => $pembayaran
             ], 200);
         } catch (\Exception $e) {
             return response()->json([
@@ -56,56 +57,15 @@ class TransaksiController extends Controller
     public function show($id)
     {
         try {
-            $transaksi = Transaksi::find($id);
+            $pembayaran = Pembayaran::find($id);
 
-            if (!$transaksi) {
-                throw new \Exception('Transaksi tidak ditemukan');
+            if (!$pembayaran) {
+                throw new \Exception('Barang tidak ditemukan');
             }
             return response()->json([
                 'status' => true,
                 'message' => 'Berhasil ambil data',
-                'data' => $transaksi
-            ], 200);
-        } catch (\Exception $e) {
-            return response()->json([
-                'status' => false,
-                'message' => $e->getMessage(),
-                'data' => []
-            ], 400);
-        }
-    }
-
-    /**
-     * Update only for tanggal.
-     */
-    public function update(Request $request, $id)
-    {
-        try {
-            $request->only([
-                'tglStart',
-            ]);
-            $transaksi = Transaksi::find($id);
-            if (!$transaksi) {
-                throw new \Exception('Transaksi tidak ditemukan');
-            }
-
-            $oldTgl = $transaksi->password;
-            $newTgl = $request->tglStart;
-
-            if ($oldTgl === $newTgl) {
-                return response()->json([
-                    'status' => false,
-                    'message' => 'Tanggal cannot be the same as the old one',
-                    'data' => []
-                ], 401);
-            }
-            $transaksi->update([
-                'password' => $request->input('tglStart')
-            ]);
-            return response()->json([
-                'status' => true,
-                'message' => 'Tanggal updated successfully',
-                'data' => $transaksi
+                'data' => $pembayaran
             ], 200);
         } catch (\Exception $e) {
             return response()->json([
@@ -122,17 +82,44 @@ class TransaksiController extends Controller
     public function destroy($id)
     {
         try {
-            $transaksi = Transaksi::find($id);
-            if (!$transaksi) {
+            $pembayaran = Pembayaran::find($id);
+            if (!$pembayaran) {
                 throw new \Exception('Barang tidak ditemukan');
             }
 
-            $transaksi->delete();
+            $pembayaran->delete();
 
             return response()->json([
                 'status' => true,
                 'message' => 'Berhasil delete data',
-                'data' => $transaksi
+                'data' => $pembayaran
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => false,
+                'message' => $e->getMessage(),
+                'data' => []
+            ], 400);
+        }
+    }
+
+    /**
+     * menampilkan data pembayaran berdasarkan id transaksi 
+     * (jadi bisa lihat pembayaran normal dan denda dari transaksi)
+     */
+    public function sumPembayaranDalamTransaksi($idTransaksi)
+    {
+        try {
+            $pembayaran = Pembayaran::where('id_transaksi', $idTransaksi)->get();
+            if (!$pembayaran) {
+                throw new \Exception('Pembayaran tidak ditemukan');
+            }
+            $totalPrice = $pembayaran->sum('price');
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Berhasil ambil data',
+                'data' => $totalPrice
             ], 200);
         } catch (\Exception $e) {
             return response()->json([

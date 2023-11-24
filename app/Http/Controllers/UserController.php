@@ -92,20 +92,8 @@ class UserController extends Controller
             if (!$user) {
                 throw new \Exception('Barang tidak ditemukan');
             }
-            $validator = Validator::make($request->all(), [
-                'imageProfile' => 'nullable:jpeg,png,jpg|max:2048' //2 mb=2048
-            ]);
-            if ($validator->fails())
-                return response(['message' => $validator->errors()], 400);
 
-            // utk simpan ke img ke storage/app/public/img
-            //nanti di database image disimpan sbg string
-            $image = $request->file('imageProfile');
-            $uploadFolder = 'img';
-            $image_uploaded_path = $image->store($uploadFolder, 'public');
-            $uploadedimg =  basename($image_uploaded_path);
-
-            $user->update(array_merge($request->all(), ['imageProfile' => $uploadedimg]));
+            $user->update($request->all());
 
             return response()->json([
                 'status' => true,
