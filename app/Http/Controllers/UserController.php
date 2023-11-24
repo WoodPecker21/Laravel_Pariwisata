@@ -147,4 +147,42 @@ class UserController extends Controller
             ], 400);
         }
     }
+
+    /**
+     * Update the password of the certain id
+     */
+    public function updatePassword(Request $request, $email)
+    {
+        try {
+            $request->only('password');
+            $user = User::where('email', $email)->firstOrFail();
+            if (!$user) {
+                throw new \Exception('User not found');
+            }
+            $oldPassword = $user->password;
+            $newPassword = $request->password;
+
+            if ($oldPassword === $newPassword) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Password cannot be the same as the old one',
+                    'data' => []
+                ], 401);
+            }
+            $user->update([
+                'password' => $request->input('password')
+            ]);
+            return response()->json([
+                'status' => true,
+                'message' => 'Password updated successfully',
+                'data' => $user
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => false,
+                'message' => $e->getMessage(),
+                'data' => []
+            ], 400);
+        }
+    }
 }

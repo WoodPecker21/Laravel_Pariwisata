@@ -20,3 +20,4 @@ use App\Http\Controllers\TransaksiController;
 Route::apiResource('objekwisata', ObjekWisataController::class);
 Route::apiResource('user', UserController::class);
 Route::apiResource('transaksi', TransaksiController::class);
+Route::put('updatePassword/{email}', [UserController::class, 'updatePassword']);
