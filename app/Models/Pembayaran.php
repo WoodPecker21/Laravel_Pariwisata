@@ -9,6 +9,7 @@ class Pembayaran extends Model
 {
     use HasFactory;
     protected $table = 'pembayarans';
+    public $timestamps = false;
     protected $primaryKey = 'id';
     protected $fillable = [
         'price',

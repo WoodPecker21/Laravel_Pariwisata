@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 
 class UserController extends Controller
 {
@@ -94,6 +95,13 @@ class UserController extends Controller
             }
 
             $user->update($request->all());
+
+            // $photo = $request->imageProfile;
+            // $photo = str_replace('data:image/png;base64,', '', $photo);
+            // $photo = str_replace(' ', '+', $photo);
+            // $photoName = $user->id . '_' . time() . '.png';
+            // File::put(public_path() . '/images/' . $photoName, base64_decode($photo));
+
 
             return response()->json([
                 'status' => true,
