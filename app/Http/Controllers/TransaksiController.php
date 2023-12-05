@@ -89,16 +89,6 @@ class TransaksiController extends Controller
                 throw new \Exception('Transaksi tidak ditemukan');
             }
 
-            $oldTgl = $transaksi->password;
-            $newTgl = $request->tglStart;
-
-            if ($oldTgl === $newTgl) {
-                return response()->json([
-                    'status' => false,
-                    'message' => 'Tanggal cannot be the same as the old one',
-                    'data' => []
-                ], 401);
-            }
             $transaksi->update([
                 'password' => $request->input('tglStart')
             ]);
