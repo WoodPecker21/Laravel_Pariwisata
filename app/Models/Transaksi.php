@@ -19,4 +19,19 @@ class Transaksi extends Model
         'ktpNumber',
         'tglStart',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'idUser', 'id');
+    }
+
+    public function bayar()
+    {
+        return $this->belongsTo(Bayar::class, 'idBayar', 'id');
+    }
+
+    public function objek()
+    {
+        return $this->belongsTo(Objek::class, 'idObjek', 'id');
+    }
 }

@@ -13,7 +13,7 @@ class TransaksiController extends Controller
     public function index()
     {
         try {
-            $transaksi = Transaksi::all();
+            $transaksi = Transaksi::with(['user', 'bayar', 'objek'])->get();
             return response()->json([
                 'status' => true,
                 'message' => 'Berhasil ambil data',
@@ -56,7 +56,7 @@ class TransaksiController extends Controller
     public function show($id)
     {
         try {
-            $transaksi = Transaksi::find($id);
+            $transaksi = Transaksi::with(['user', 'bayar', 'objek'])->find($id);
 
             if (!$transaksi) {
                 throw new \Exception('Transaksi tidak ditemukan');
