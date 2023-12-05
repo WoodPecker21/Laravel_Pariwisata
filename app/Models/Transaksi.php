@@ -27,11 +27,11 @@ class Transaksi extends Model
 
     public function bayar()
     {
-        return $this->belongsTo(Bayar::class, 'idBayar', 'id');
+        return $this->belongsTo(Pembayaran::class, 'idBayar', 'id');
     }
 
     public function objek()
     {
-        return $this->belongsTo(Objek::class, 'idObjek', 'id');
+        return $this->belongsTo(ObjekWisata::class, 'idObjek', 'id');
     }
 }
