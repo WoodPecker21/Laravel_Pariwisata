@@ -14,9 +14,9 @@ return new class extends Migration
     {
         Schema::create('transaksis', function (Blueprint $table) {
             $table->id();
-            $table->integer('idUser');
-            $table->integer('idBayar');
-            $table->integer('idObjek');
+            $table->foreignId('idUser')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('idBayar')->constrained('pembayarans')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('idObjek')->constrained('objekwisatas')->onDelete('cascade')->onUpdate('cascade');
             $table->string('name');
             $table->integer('jumlahTamu');
             $table->string('ktpNumber');
@@ -24,6 +24,7 @@ return new class extends Migration
             $table->timestamps();
         });
     }
+
 
     /**
      * Reverse the migrations.
