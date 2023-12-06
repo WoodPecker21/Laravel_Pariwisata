@@ -23,4 +23,5 @@ Route::apiResource('user', UserController::class);
 Route::apiResource('transaksi', TransaksiController::class);
 Route::apiResource('pembayaran', PembayaranController::class);
 Route::put('updatePassword/{email}', [UserController::class, 'updatePassword']);
+Route::put('updateTanggal/{id}', [TransaksiController::class, 'updateTanggal']);
 Route::get('sumPembayaranDalamTransaksi/{idtransaksi}', [PembayaranController::class, 'sumPembayaranDalamTransaksi']);

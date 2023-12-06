@@ -78,7 +78,7 @@ class TransaksiController extends Controller
     /**
      * Update only for tanggal.
      */
-    public function update(Request $request, $id)
+    public function updateTanggal(Request $request, $id)
     {
         try {
             $request->only([
