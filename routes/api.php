@@ -25,3 +25,4 @@ Route::apiResource('pembayaran', PembayaranController::class);
 Route::put('updatePassword/{email}', [UserController::class, 'updatePassword']);
 Route::put('updateTanggal/{id}', [TransaksiController::class, 'updateTanggal']);
 Route::get('sumPembayaranDalamTransaksi/{idtransaksi}', [PembayaranController::class, 'sumPembayaranDalamTransaksi']);
+Route::apiResource('news', NewsController::class);
