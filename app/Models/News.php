@@ -13,8 +13,7 @@ class News extends Model
     protected $fillable = [
         'judul',
         'isiBerita',
-        'pulau',
+        'pengarang',
         'gambar',
-        'rating',
     ];
 }

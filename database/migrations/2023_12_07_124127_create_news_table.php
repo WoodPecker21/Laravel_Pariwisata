@@ -15,9 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('judul');
             $table->string('isiBerita');
-            $table->string('pulau');
+            $table->string('pengarang');
             $table->string('gambar')->nullable();
-            $table->double('rating');
             $table->timestamps();
         });
     }
