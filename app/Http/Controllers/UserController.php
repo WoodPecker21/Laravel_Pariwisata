@@ -144,6 +144,30 @@ class UserController extends Controller
         }
     }
 
+    public function updateImage(Request $request, $id)
+    {
+        try {
+            $user = User::find($id);
+            if (!$user) throw new \Exception('User tidak ditemukan');
+            
+            $newImage = $request->only('image');
+
+            $user->update(['image' => $newImage]);
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Berhasil update data',
+                'data' => $user
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => false,
+                'message' => $e->getMessage(),
+                'data' => []
+            ], 400);
+        }
+    }
+
     /**
      * Update the password of the certain id
      */

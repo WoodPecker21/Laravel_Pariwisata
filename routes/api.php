@@ -6,6 +6,7 @@ use App\Http\Controllers\ObjekWisataController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\PembayaranController;
+use App\Http\Controllers\NewsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,3 +27,4 @@ Route::put('updatePassword/{email}', [UserController::class, 'updatePassword']);
 Route::put('updateTanggal/{id}', [TransaksiController::class, 'updateTanggal']);
 Route::get('sumPembayaranDalamTransaksi/{idtransaksi}', [PembayaranController::class, 'sumPembayaranDalamTransaksi']);
 Route::apiResource('news', NewsController::class);
+Route::put('updateImage/{id}', [UserController::class, 'updatePassword']);
