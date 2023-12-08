@@ -59,7 +59,7 @@ class ObjekWisataController extends Controller
             $objekwisata = ObjekWisata::find($id);
 
             if (!$objekwisata) {
-                throw new \Exception('Barang tidak ditemukan');
+                throw new \Exception('Objek Wisata tidak ditemukan');
             }
             return response()->json([
                 'status' => true,
@@ -83,7 +83,7 @@ class ObjekWisataController extends Controller
         try {
             $objekwisata = ObjekWisata::find($id);
             if (!$objekwisata) {
-                throw new \Exception('Barang tidak ditemukan');
+                throw new \Exception('Objek Wisata tidak ditemukan');
             }
 
             $objekwisata->update($request->all());
@@ -110,7 +110,7 @@ class ObjekWisataController extends Controller
         try {
             $objekwisata = ObjekWisata::find($id);
             if (!$objekwisata) {
-                throw new \Exception('Barang tidak ditemukan');
+                throw new \Exception('Objek Wisata tidak ditemukan');
             }
 
             $objekwisata->delete();
@@ -118,6 +118,29 @@ class ObjekWisataController extends Controller
             return response()->json([
                 'status' => true,
                 'message' => 'Berhasil delete data',
+                'data' => $objekwisata
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => false,
+                'message' => $e->getMessage(),
+                'data' => []
+            ], 400);
+        }
+    }
+
+    //show by pulau
+    public function showByPulau($pulau)
+    {
+        try {
+            $objekwisata = ObjekWisata::where('pulau', $pulau)->get();
+
+            if (!$objekwisata) {
+                throw new \Exception('Objek Wisata tidak ditemukan');
+            }
+            return response()->json([
+                'status' => true,
+                'message' => 'Berhasil ambil data',
                 'data' => $objekwisata
             ], 200);
         } catch (\Exception $e) {
