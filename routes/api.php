@@ -27,3 +27,4 @@ Route::put('updateTanggal/{id}', [TransaksiController::class, 'updateTanggal']);
 Route::get('sumPembayaranDalamTransaksi/{idtransaksi}', [PembayaranController::class, 'sumPembayaranDalamTransaksi']);
 Route::apiResource('news', NewsController::class);
 Route::get('showByPulau/{pulau}', [ObjekWisataController::class, 'showByPulau']);
+Route::get('showTransactionsByUserId/{iduser}', [TransaksiController::class, 'showTransactionsByUserId']);

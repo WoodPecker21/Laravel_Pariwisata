@@ -28,6 +28,28 @@ class TransaksiController extends Controller
         }
     }
 
+    public function showTransactionsByUserId($iduser)
+    {
+        try {
+            $transaksi = Transaksi::where('idUser', $iduser)
+                ->with(['user', 'bayar', 'objek'])
+                ->get();
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Berhasil ambil data transaksi berdasarkan id user',
+                'data' => $transaksi
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => false,
+                'message' => $e->getMessage(),
+                'data' => []
+            ], 400);
+        }
+    }
+
+
     /**
      * Store a newly created resource in storage.
      */
