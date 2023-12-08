@@ -6,6 +6,7 @@ use App\Http\Controllers\ObjekWisataController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\PembayaranController;
+use App\Http\Controllers\NewsController;
 
 /*
 |--------------------------------------------------------------------------
