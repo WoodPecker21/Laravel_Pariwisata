@@ -107,19 +107,25 @@ class PembayaranController extends Controller
      * menampilkan data pembayaran berdasarkan id transaksi 
      * (jadi bisa lihat pembayaran normal dan denda dari transaksi)
      */
-    public function sumPembayaranDalamTransaksi($idTransaksi)
+    /**
+     * Update the password of the certain id
+     */
+    public function updateDenda(Request $request, $id)
     {
         try {
-            $pembayaran = Pembayaran::where('id_transaksi', $idTransaksi)->get();
+            $request->only('price');
+            $pembayaran = Pembayaran::where('id', $id)->firstOrFail();
             if (!$pembayaran) {
-                throw new \Exception('Pembayaran tidak ditemukan');
+                throw new \Exception('pembayaran not found');
             }
-            $totalPrice = $pembayaran->sum('price');
 
+            $pembayaran->update([
+                'price' => $request->input('price')
+            ]);
             return response()->json([
                 'status' => true,
-                'message' => 'Berhasil ambil data',
-                'data' => $totalPrice
+                'message' => 'pembayaran updated successfully',
+                'data' => $pembayaran
             ], 200);
         } catch (\Exception $e) {
             return response()->json([
