@@ -26,6 +26,7 @@ Route::apiResource('pembayaran', PembayaranController::class);
 Route::put('updatePassword/{email}', [UserController::class, 'updatePassword']);
 Route::put('updateTanggal/{id}', [TransaksiController::class, 'updateTanggal']);
 Route::get('sumPembayaranDalamTransaksi/{idtransaksi}', [PembayaranController::class, 'sumPembayaranDalamTransaksi']);
+Route::get('showTransactionsByUserId/{iduser}', [TransaksiController::class, 'showTransactionsByUserId']);
 Route::apiResource('news', NewsController::class);
 Route::put('updateImage/{id}', [UserController::class, 'updateImage']);
 Route::put('updateDenda/{id}', [PembayaranController::class, 'updateDenda']);

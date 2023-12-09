@@ -149,10 +149,10 @@ class UserController extends Controller
         try {
             $user = User::find($id);
             if (!$user) throw new \Exception('User tidak ditemukan');
-            
-            $newImage = $request->only('image');
 
-            $user->update(['image' => $newImage]);
+            $newImage = $request->only('imageProfile');
+
+            $user->update(['imageProfile' => $newImage]);
 
             return response()->json([
                 'status' => true,
